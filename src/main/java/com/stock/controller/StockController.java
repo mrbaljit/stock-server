@@ -1,6 +1,6 @@
 package com.stock.controller;
 
-import com.stock.domain.Stock;
+import com.stock.domain.Product;
 import com.stock.domain.StockViewModel;
 import com.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,9 @@ public class StockController {
     }
 
     @RequestMapping(value = "/allStock", method = GET)
-    public List<Stock> getAll(){
+    public List<Product> getAll(){
+        List<Product> products = stockService.getAll();
+        System.out.println(products.get(0).getProductDiscount().getStartDate());
         return stockService.getAll();
     }
 
@@ -67,8 +69,6 @@ public class StockController {
 
         System.out.println("Current Date: " + ft.format(stockViewModel.getDiscountStartDate()));
         System.out.println("End Date: " + ft.format(stockViewModel.getDiscountEndDate()));
-
-
 
         System.out.println(">>>>>>>>>>>>>>>>>");
     }

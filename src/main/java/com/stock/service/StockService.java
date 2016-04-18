@@ -1,6 +1,6 @@
 package com.stock.service;
 
-import com.stock.domain.Stock;
+import com.stock.domain.Product;
 import com.stock.repository.StockRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ public class StockService {
     @Autowired
     private StockRepository repository;
 
-    public List<Stock> getAll() {
+    public List<Product> getAll() {
          return repository.findAll();
 
     }

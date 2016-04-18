@@ -1,7 +1,7 @@
 package com.stock;
 
-import com.stock.domain.Stock;
-import com.stock.domain.StockData;
+import com.stock.domain.Product;
+import com.stock.domain.ProductDiscount;
 import com.stock.repository.StockDataRepository;
 import com.stock.repository.StockRepository;
 import org.slf4j.Logger;
@@ -31,18 +31,21 @@ public class StockServerApplication {
 	public CommandLineRunner demo(StockRepository repository, StockDataRepository stockDataRepository) {
 		return (args) -> {
 			// save a couple of customers
-			StockData stockData = new StockData();
-			stockData.setDate(new Date());
-			stockData.setName("hello");
-			stockData.setPrice("200");
+			ProductDiscount productDiscount = new ProductDiscount();
+			productDiscount.setStartDate(new Date());
+			productDiscount.setEndDate(new Date());
+			productDiscount.setNeverExpires("true");
+			productDiscount.setDiscountTypes("1");
 
-			stockDataRepository.save(stockData);
-			repository.save(new Stock(1, "Jack", "Bauer", stockData));
+			stockDataRepository.save(productDiscount);
+			repository.save(new Product(1, "ADID", "Adidas Jersey",
+					"3", "XL Jersey Red Colour", "2010 XL Red",
+					"500", "600", productDiscount));
 
 			// fetch all customers
 			log.info("Customers found with findAll():");
 			log.info("-------------------------------");
-			for (Stock customer : repository.findAll()) {
+			for (Product customer : repository.findAll()) {
 				log.info(customer.toString());
 			}
 			log.info("");
