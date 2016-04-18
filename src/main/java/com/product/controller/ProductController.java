@@ -38,14 +38,14 @@ public class ProductController {
         return "Hello there !";
     }
 
-    @RequestMapping(value = "/allStock", method = GET)
+    @RequestMapping(value = "/allProduct", method = GET)
     public List<Product> getAll(){
         List<Product> products = productService.getAll();
         System.out.println(products.get(0).getProductDiscount().getStartDate());
         return productService.getAll();
     }
 
-    @RequestMapping(value = "/addStock" , method = RequestMethod.POST)
+    @RequestMapping(value = "/addProduct" , method = RequestMethod.POST)
     public void productStock(@RequestBody ProductViewModel productViewModel) {
 
         Product product = new Product();
@@ -53,10 +53,9 @@ public class ProductController {
         ProductDiscount productDiscount = new ProductDiscount();
         productDiscount = productMapper.mapProductViewModelToProductDiscount(productViewModel, productDiscount);
 
-
         productService.saveProduct(product, productDiscount);
 
-        System.out.println(productViewModel.getProductCategory());
+      /*  System.out.println(productViewModel.getProductCategory());
         System.out.println(productViewModel.getProductCode());
         System.out.println(productViewModel.getProductName());
         System.out.println(productViewModel.getCostPrice());
@@ -81,7 +80,7 @@ public class ProductController {
 
         System.out.println("Current Date: " + ft.format(productViewModel.getDiscountStartDate()));
         System.out.println("End Date: " + ft.format(productViewModel.getDiscountEndDate()));
-
+*/
         System.out.println(">>>>>>>>>>>>>>>>>");
     }
 
