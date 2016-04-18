@@ -1,11 +1,11 @@
-package com.stock.domain;
+package com.product.domain;
 
 import java.util.Date;
 
 /**
  * Created by u342597 on 18/04/2016.
  */
-public class StockViewModel {
+public class ProductViewModel {
 
     private String productCategory;
     private String productCode;

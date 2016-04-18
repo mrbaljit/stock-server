@@ -1,4 +1,4 @@
-package com.stock.domain;
+package com.product.domain;
 
 import java.io.Serializable;
 
