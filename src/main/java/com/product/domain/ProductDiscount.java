@@ -19,8 +19,8 @@ public class ProductDiscount implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PRODUCT_DISCOUNT_ID", nullable = false)
-    private Long productDiscountId;
+    @Column(name = "ID", nullable = false)
+    private Long id;
 
     @Column(name = "STARTDATE")
     private Date startDate;
@@ -37,20 +37,20 @@ public class ProductDiscount implements Serializable {
     public ProductDiscount() {
     }
 
-    public ProductDiscount(long productDiscountId, String discountTypes, String neverExpires, Date startDate, Date endDate) {
-        this.productDiscountId = productDiscountId;
+    public ProductDiscount(long id, String discountTypes, String neverExpires, Date startDate, Date endDate) {
+        this.id = id;
         this.discountTypes = discountTypes;
         this.neverExpires = neverExpires;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public Long getProductDiscountId() {
-        return productDiscountId;
+    public Long getId() {
+        return id;
     }
 
-    public void setProductDiscountId(Long productDiscountId) {
-        this.productDiscountId = productDiscountId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDiscountTypes() {

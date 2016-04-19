@@ -48,7 +48,8 @@ public class ProductController {
     @RequestMapping(value = "/addProduct" , method = RequestMethod.POST)
     public void productStock(@RequestBody ProductViewModel productViewModel) {
 
-        Product product = new Product();
+        Product product = new Product(1L);
+
         product = productMapper.mapProductViewModelToProduct(productViewModel, product);
         ProductDiscount productDiscount = new ProductDiscount();
         productDiscount = productMapper.mapProductViewModelToProductDiscount(productViewModel, productDiscount);

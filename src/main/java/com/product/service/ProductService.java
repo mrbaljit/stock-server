@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 /**
  * Created by u342597 on 14/04/2016.
  */
@@ -29,8 +31,11 @@ public class ProductService {
 
     }
 
+    @Transactional
     public void saveProduct(Product product, ProductDiscount productDiscount) {
+
         productDiscountRepository.save(productDiscount);
+        product.setProductDiscount(productDiscount);
         productRepository.save(product);
     }
 

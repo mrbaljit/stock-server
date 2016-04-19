@@ -29,6 +29,7 @@ public class ProductMapper {
         productDiscount.setStartDate(productViewModel.getDiscountStartDate());
         productDiscount.setEndDate(productViewModel.getDiscountEndDate());
         productDiscount.setNeverExpires(productViewModel.getDiscountExpires());
+        productDiscount.setDiscountTypes(productViewModel.getDiscountType());
 
         return productDiscount;
     }

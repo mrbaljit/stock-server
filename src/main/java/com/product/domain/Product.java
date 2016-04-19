@@ -2,6 +2,7 @@ package com.product.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,14 +45,16 @@ public class Product implements Serializable {
     @Column(name = "PRODUCTINVDESC", nullable = false)
     private String productInvoiceDescription;
 
-
-    @OneToOne
-    @JoinColumn(name="productDiscountId")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="PRODUCT_DISCOUNT_ID", nullable = false)
     private ProductDiscount productDiscount;
 
     public Product() {
     }
 
+    public Product(long productId) {
+        this.productId = productId;
+    }
     public Product(long productId, String productCode, String productName,
                    String productCategory, String productDescription, String productInvoiceDescription,
                    String retailPrice, String costPrice,
