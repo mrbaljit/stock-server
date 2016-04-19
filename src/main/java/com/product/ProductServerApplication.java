@@ -31,7 +31,7 @@ public class ProductServerApplication {
 	public CommandLineRunner demo(ProductRepository productRepository, ProductDiscountRepository productDiscountRepository) {
 		return (args) -> {
 			// save a couple of customers
-			ProductDiscount productDiscount = new ProductDiscount();
+			/*ProductDiscount productDiscount = new ProductDiscount();
 			productDiscount.setStartDate(new Date());
 			productDiscount.setEndDate(new Date());
 			productDiscount.setNeverExpires("true");
@@ -41,7 +41,7 @@ public class ProductServerApplication {
 			productRepository.save(new Product(1, "ADID", "Adidas Jersey",
 					"3", "XL Jersey Red Colour", "2010 XL Red",
 					"500", "600", productDiscount));
-
+*/
 			// fetch all customers
 			log.info("Customers found with findAll():");
 			log.info("-------------------------------");
