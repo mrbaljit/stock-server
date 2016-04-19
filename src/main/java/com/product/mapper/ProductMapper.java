@@ -5,11 +5,16 @@ import com.product.domain.ProductDiscount;
 import com.product.domain.ProductViewModel;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  * Created by u342597 on 19/04/2016.
  */
 @Component
 public class ProductMapper {
+
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     public Product mapProductViewModelToProduct(ProductViewModel productViewModel, Product product) {
 
@@ -24,14 +29,33 @@ public class ProductMapper {
         return product;
     }
 
-    public ProductDiscount mapProductViewModelToProductDiscount(ProductViewModel productViewModel, ProductDiscount productDiscount) {
+    public ProductDiscount mapProductViewModelToProductDiscount(ProductViewModel productViewModel, ProductDiscount productDiscount) throws ParseException {
 
-        productDiscount.setStartDate(productViewModel.getDiscountStartDate());
-        productDiscount.setEndDate(productViewModel.getDiscountEndDate());
+
+        productDiscount.setStartDate(formatter.parse(productViewModel.getDiscountStartDate()));
+        productDiscount.setEndDate(formatter.parse(productViewModel.getDiscountEndDate()));
         productDiscount.setNeverExpires(productViewModel.getDiscountExpires());
         productDiscount.setDiscountTypes(productViewModel.getDiscountType());
 
         return productDiscount;
     }
 
+    public ProductViewModel mapDomainToProductViewModel(ProductViewModel productViewModel, Product product,
+                                                         ProductDiscount productDiscount) {
+
+        productViewModel.setCostPrice(product.getCostPrice());
+        productViewModel.setRetailPrice(product.getRetailPrice());
+        productViewModel.setProductCategory(product.getProductCategory());
+        productViewModel.setProductCode(product.getProductCode());
+        productViewModel.setProductName(product.getProductName());
+        productViewModel.setProductDescription(product.getProductDescription());
+        productViewModel.setProductInvoiceDescription(product.getProductInvoiceDescription());
+
+        productViewModel.setDiscountStartDate(formatter.format(productDiscount.getStartDate()));
+        productViewModel.setDiscountEndDate(formatter.format(productDiscount.getEndDate()));
+        productViewModel.setDiscountExpires(productDiscount.getNeverExpires());
+        productViewModel.setDiscountType(productDiscount.getDiscountTypes());
+        productViewModel.setProductId(String.valueOf(product.getProductId()));
+        return productViewModel;
+    }
 }

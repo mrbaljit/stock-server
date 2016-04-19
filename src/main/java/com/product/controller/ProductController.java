@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -39,10 +40,10 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/allProduct", method = GET)
-    public List<Product> getAll(){
-        List<Product> products = productService.getAll();
-        System.out.println(products.get(0).getProductDiscount().getStartDate());
-        return productService.getAll();
+    public List<ProductViewModel> getAll(){
+        List<ProductViewModel> products = productService.getAll();
+     //   System.out.println(products.get(0).getProductDiscount().getStartDate());
+        return  productService.getAll();
     }
 
     @RequestMapping(value = "/addProduct" , method = RequestMethod.POST)
@@ -52,7 +53,11 @@ public class ProductController {
 
         product = productMapper.mapProductViewModelToProduct(productViewModel, product);
         ProductDiscount productDiscount = new ProductDiscount();
-        productDiscount = productMapper.mapProductViewModelToProductDiscount(productViewModel, productDiscount);
+        try {
+            productDiscount = productMapper.mapProductViewModelToProductDiscount(productViewModel, productDiscount);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         productService.saveProduct(product, productDiscount);
 

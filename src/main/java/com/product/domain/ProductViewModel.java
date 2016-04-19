@@ -7,6 +7,7 @@ import java.util.Date;
  */
 public class ProductViewModel {
 
+    private String productId;
     private String productCategory;
     private String productCode;
     private String productName;
@@ -19,9 +20,17 @@ public class ProductViewModel {
     private String discountPercentage;
     private String discountForProduct;
     private String discountAmountForOrdersOver;
-    private Date discountStartDate;
-    private Date discountEndDate;
+    private String discountStartDate;
+    private String discountEndDate;
     private String discountExpires;
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
 
     public String getProductCategory() {
         return productCategory;
@@ -63,14 +72,6 @@ public class ProductViewModel {
         this.discountAmount = discountAmount;
     }
 
-    public Date getDiscountEndDate() {
-        return discountEndDate;
-    }
-
-    public void setDiscountEndDate(Date discountEndDate) {
-        this.discountEndDate = discountEndDate;
-    }
-
     public String getDiscountExpires() {
         return discountExpires;
     }
@@ -103,14 +104,6 @@ public class ProductViewModel {
         this.discountPercentage = discountPercentage;
     }
 
-    public Date getDiscountStartDate() {
-        return discountStartDate;
-    }
-
-    public void setDiscountStartDate(Date discountStartDate) {
-        this.discountStartDate = discountStartDate;
-    }
-
     public String getDiscountType() {
         return discountType;
     }
@@ -141,5 +134,21 @@ public class ProductViewModel {
 
     public void setRetailPrice(String retailPrice) {
         this.retailPrice = retailPrice;
+    }
+
+    public String getDiscountEndDate() {
+        return discountEndDate;
+    }
+
+    public void setDiscountEndDate(String discountEndDate) {
+        this.discountEndDate = discountEndDate;
+    }
+
+    public String getDiscountStartDate() {
+        return discountStartDate;
+    }
+
+    public void setDiscountStartDate(String discountStartDate) {
+        this.discountStartDate = discountStartDate;
     }
 }
