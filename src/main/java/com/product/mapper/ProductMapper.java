@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 public class ProductMapper {
 
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
 
     public Product mapProductViewModelToProduct(ProductViewModel productViewModel, Product product) {
 
@@ -32,8 +33,8 @@ public class ProductMapper {
     public ProductDiscount mapProductViewModelToProductDiscount(ProductViewModel productViewModel, ProductDiscount productDiscount) throws ParseException {
 
 
-        productDiscount.setStartDate(formatter.parse(productViewModel.getDiscountStartDate()));
-        productDiscount.setEndDate(formatter.parse(productViewModel.getDiscountEndDate()));
+        productDiscount.setStartDate(formatter1.parse(productViewModel.getDiscountStartDate()));
+        productDiscount.setEndDate(formatter1.parse(productViewModel.getDiscountEndDate()));
         productDiscount.setNeverExpires(productViewModel.getDiscountExpires());
         productDiscount.setDiscountTypes(productViewModel.getDiscountType());
 

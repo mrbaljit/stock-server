@@ -56,4 +56,38 @@ public class ProductService {
     }
 
 
+    @Transactional
+    public ProductViewModel getProduct(Long id) {
+
+        Product product= productRepository.findOne(id);
+        ProductViewModel productViewModel = new ProductViewModel();
+        productViewModel = productMapper.mapDomainToProductViewModel(productViewModel, product, product.getProductDiscount());
+        return productViewModel;
+
+    }
+
+    @Transactional
+    public Product getProduct1(Long id) {
+
+        return productRepository.findOne(id);
+
+
+    }
+
+    @Transactional
+    public void updateProduct(Product product, ProductDiscount productDiscount, Long id) {
+
+        Product p = productRepository.findOne(id);
+        //Product p = productRepository.findOne(75L);
+        p.setCostPrice("611");
+        p.setCostPrice(product.getCostPrice());
+        p.setRetailPrice(product.getRetailPrice());
+        p.setProductCode(product.getProductCode());
+        p.setProductCategory(product.getProductCategory());
+        p.setProductInvoiceDescription(product.getProductInvoiceDescription());
+        p.setProductDescription(product.getProductDescription());
+        p.setProductName(product.getProductName());
+        p.setProductDiscount(productDiscount);
+        productRepository.save(p);
+    }
 }

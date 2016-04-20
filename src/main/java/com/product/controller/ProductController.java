@@ -6,6 +6,7 @@ import com.product.domain.ProductViewModel;
 import com.product.mapper.ProductMapper;
 import com.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,20 +47,40 @@ public class ProductController {
         return  productService.getAll();
     }
 
-    @RequestMapping(value = "/addProduct" , method = RequestMethod.POST)
-    public void productStock(@RequestBody ProductViewModel productViewModel) {
+    @RequestMapping(value = "{id}/getProduct", method = GET)
+    public ProductViewModel getAll(@PathVariable String id){
+        System.out.println(id + " product id ");
+        ProductViewModel productViewModel = productService.getProduct(Long.valueOf(id));
+        return  productViewModel;
+    }
 
-        Product product = new Product(1L);
-
-        product = productMapper.mapProductViewModelToProduct(productViewModel, product);
-        ProductDiscount productDiscount = new ProductDiscount();
+    @RequestMapping(value = "/updateProduct" , method = RequestMethod.POST)
+    public void updateProduct(@RequestBody ProductViewModel productViewModel) {
         try {
+            Product product = productService.getProduct1(Long.valueOf(productViewModel.getProductId()));
+            ProductDiscount productDiscount = product.getProductDiscount();
+            product = productMapper.mapProductViewModelToProduct(productViewModel, product);
             productDiscount = productMapper.mapProductViewModelToProductDiscount(productViewModel, productDiscount);
-        } catch (ParseException e) {
+            productService.saveProduct(product, productDiscount);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(value = "/addProduct" , method = RequestMethod.POST)
+    public void addProduct(@RequestBody ProductViewModel productViewModel) {
+
+        try {
+            Product product = new Product(1L);
+            product = productMapper.mapProductViewModelToProduct(productViewModel, product);
+            ProductDiscount productDiscount = new ProductDiscount();
+            productDiscount = productMapper.mapProductViewModelToProductDiscount(productViewModel, productDiscount);
+            productService.saveProduct(product, productDiscount);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        productService.saveProduct(product, productDiscount);
+
 
       /*  System.out.println(productViewModel.getProductCategory());
         System.out.println(productViewModel.getProductCode());
