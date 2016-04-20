@@ -51,6 +51,7 @@ public class ProductMapper {
         productViewModel.setProductName(product.getProductName());
         productViewModel.setProductDescription(product.getProductDescription());
         productViewModel.setProductInvoiceDescription(product.getProductInvoiceDescription());
+        productViewModel.setProductId(String.valueOf(product.getProductId()));
 
         productViewModel.setDiscountStartDate(formatter.format(productDiscount.getStartDate()));
         productViewModel.setDiscountEndDate(formatter.format(productDiscount.getEndDate()));
