@@ -41,9 +41,10 @@ public class ProductMapper {
         return productDiscount;
     }
 
-    public ProductViewModel mapDomainToProductViewModel(ProductViewModel productViewModel, Product product,
+    public ProductViewModel mapDomainToProductViewModel(Product product,
                                                          ProductDiscount productDiscount) {
 
+        ProductViewModel productViewModel = new ProductViewModel();
         productViewModel.setCostPrice(product.getCostPrice());
         productViewModel.setRetailPrice(product.getRetailPrice());
         productViewModel.setProductCategory(product.getProductCategory());

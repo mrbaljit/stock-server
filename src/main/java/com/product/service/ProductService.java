@@ -35,14 +35,10 @@ public class ProductService {
     public List<ProductViewModel> getAll() {
         List<Product> products = productRepository.findAll();
         List<ProductViewModel> productViewModelList = new ArrayList<>();
-        ProductViewModel productViewModel = new ProductViewModel();
         for(Product product : products) {
-            productViewModel = new ProductViewModel();
-            productViewModel = productMapper.mapDomainToProductViewModel(productViewModel, product, product.getProductDiscount());
+            ProductViewModel productViewModel  = productMapper.mapDomainToProductViewModel(product, product.getProductDiscount());
             productViewModelList.add(productViewModel);
         }
-
-         //return productRepository.findAll();
         return productViewModelList;
 
     }
@@ -55,26 +51,13 @@ public class ProductService {
         productRepository.save(product);
     }
 
-
     @Transactional
-    public ProductViewModel getProduct(Long id) {
-
-        Product product= productRepository.findOne(id);
-        ProductViewModel productViewModel = new ProductViewModel();
-        productViewModel = productMapper.mapDomainToProductViewModel(productViewModel, product, product.getProductDiscount());
-        return productViewModel;
-
-    }
-
-    @Transactional
-    public Product getProduct1(Long id) {
+    public Product getProduct(Long id) {
 
         return productRepository.findOne(id);
-
-
     }
 
-    @Transactional
+ /*   @Transactional
     public void updateProduct(Product product, ProductDiscount productDiscount, Long id) {
 
         Product p = productRepository.findOne(id);
@@ -89,5 +72,5 @@ public class ProductService {
         p.setProductName(product.getProductName());
         p.setProductDiscount(productDiscount);
         productRepository.save(p);
-    }
+    }*/
 }

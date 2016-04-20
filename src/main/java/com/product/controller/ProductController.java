@@ -42,22 +42,20 @@ public class ProductController {
 
     @RequestMapping(value = "/allProduct", method = GET)
     public List<ProductViewModel> getAll(){
-        List<ProductViewModel> products = productService.getAll();
-     //   System.out.println(products.get(0).getProductDiscount().getStartDate());
         return  productService.getAll();
     }
 
     @RequestMapping(value = "{id}/getProduct", method = GET)
     public ProductViewModel getAll(@PathVariable String id){
-        System.out.println(id + " product id ");
-        ProductViewModel productViewModel = productService.getProduct(Long.valueOf(id));
-        return  productViewModel;
+        Product product = productService.getProduct(Long.valueOf(id));
+        ProductViewModel productViewModel = productMapper.mapDomainToProductViewModel(product, product.getProductDiscount());
+        return productViewModel;
     }
 
     @RequestMapping(value = "/updateProduct" , method = RequestMethod.POST)
     public void updateProduct(@RequestBody ProductViewModel productViewModel) {
         try {
-            Product product = productService.getProduct1(Long.valueOf(productViewModel.getProductId()));
+            Product product = productService.getProduct(Long.valueOf(productViewModel.getProductId()));
             ProductDiscount productDiscount = product.getProductDiscount();
             product = productMapper.mapProductViewModelToProduct(productViewModel, product);
             productDiscount = productMapper.mapProductViewModelToProductDiscount(productViewModel, productDiscount);
