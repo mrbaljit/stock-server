@@ -87,7 +87,7 @@ public class ProductDiscount implements Serializable {
 
     @Override
     public String toString() {
-        return "Stock_Data{" +
+        return "Product_Data{" +
 
 
                 '}';
