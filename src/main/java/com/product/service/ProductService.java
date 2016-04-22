@@ -57,6 +57,12 @@ public class ProductService {
         return productRepository.findOne(id);
     }
 
+    @Transactional
+    public void deleteProduct(Long id) {
+
+        productRepository.delete(id);
+    }
+
  /*   @Transactional
     public void updateProduct(Product product, ProductDiscount productDiscount, Long id) {
 

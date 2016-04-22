@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * Created by u342597 on 14/04/2016.
@@ -43,6 +44,12 @@ public class ProductController {
         Product product = productService.getProduct(Long.valueOf(id));
         ProductViewModel productViewModel = productMapper.mapDomainToProductViewModel(product, product.getProductDiscount());
         return productViewModel;
+    }
+
+    @RequestMapping(value = "{id}/deleteProduct", method = POST)
+    public void deleteProduct(@PathVariable String id)
+    {
+        productService.deleteProduct(Long.valueOf(id));
     }
 
     @RequestMapping(value = "/createUpdateProduct" , method = RequestMethod.POST)
